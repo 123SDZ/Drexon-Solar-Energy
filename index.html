@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drexon | Solar Energy Solutions</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #000000 0%, #3a2a00 100%);
+      color: #FFD700;
+      /* Golden text */
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Golden overlay effect */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 215, 100, 0.12), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(255, 200, 80, 0.08), transparent 50%),
+        radial-gradient(circle at 50% 70%, rgba(255, 180, 60, 0.05), transparent 55%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      padding: 16px 30px;
+      background: linear-gradient(90deg, #000, #3a2a00, #000);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 80px 30px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #FFD700;
+    }
+
+    p {
+      color: #FFD700;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 120px 30px;
+      border-radius: 24px;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .hero h1 {
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 20px;
+      color: #FFD700;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      padding: 0;
+    }
+
+    /* POPUP */
+    #popupOverlay,
+    #readMorePopup {
+      position: fixed;
+      inset: 0;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 9998;
+    }
+
+    #popupOverlay.show {
+      display: block;
+      opacity: 0.85;
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    #readMorePopup.show {
+      display: block;
+      opacity: 1;
+    }
+
+    #readMorePopup {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 900px;
+      max-height: 80vh;
+      overflow-y: auto;
+      background: #111;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 0 40px rgba(255, 215, 100, 0.45);
+    }
+
+    #closePopup {
+      text-align: right;
+      cursor: pointer;
+      font-size: 20px;
+      color: #FFD700;
+    }
+
+    /* CARDS GRID */
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1400px;
+      margin: 60px auto 0;
+    }
+
+    .offer-card,
+    .faq-card {
+      background: rgba(0, 0, 0, 0.65);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 0 25px rgba(255, 215, 100, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      color: #FFD700;
+    }
+
+    .offer-card:hover,
+    .faq-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 45px rgba(255, 215, 100, 0.55);
+    }
+
+    .offer-title {
+      margin-top: 14px;
+      font-weight: bold;
+    }
+
+    /* FAQ Cards */
+    .faq-card h4 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .faq-card p {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* STICKY WHATSAPP */
+    .sticky-buttons {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 9999;
+    }
+
+    .sticky-buttons a {
+      background: #25D366;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      font-size: 22px;
+      text-decoration: none;
+      box-shadow: 0 0 25px rgba(37, 211, 102, 0.6);
+      transition: transform 0.2s ease;
+    }
+
+    .sticky-buttons a:hover {
+      transform: scale(1.1);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      section {
+        padding: 60px 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .offers-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .hero {
+        padding: 70px 18px;
+        border-radius: 16px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      p {
+        font-size: 15px;
+      }
+
+      header {
+        padding: 14px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">☀️ Drexon</div>
+  </header>
+
+  <section class="hero">
+    <h1>☀️ Drexon Renewable Energy</h1>
+    <p>Smart ROI • Trusted solar solutions</p>
+    <div class="read-more" id="openPopup">Read More</div>
+  </section>
+
+  <div id="popupOverlay"></div>
+  <div id="readMorePopup">
+    <div id="closePopup">✖</div>
+    <p>🌞 <strong>Free Consultation</strong></p>
+    <h3>Why Choose Our Consultancy Services?</h3>
+    <p>
+      When you directly approach a vendor for installing a solar plant on your rooftop or land, their suggestions often focus on maximizing their own profit. At Drexon Renewable Energy Pvt. Ltd., our goal is different — we work for your benefit. We provide independent consultancy to help you choose the best and most cost-effective system design, components, and technology mix. Our focus is on ensuring maximum return on investment (ROI) through optimized system performance and high-quality Balance of System (BOS) components. Our consultancy services are completely free for individual and domestic solar projects, so before you finalize your vendor — consult with Drexon and make a smarter solar investment.
+    </p>
+    <h3>हमारी कंसल्टेंसी सेवाएँ क्यों चुनें?</h3>
+    <p>
+      जब आप सीधे किसी वेंडर से अपनी छत या खाली भूमि पर सोलर प्लांट लगवाने जाते हैं, तो उनकी सलाह अक्सर उनके स्वयं के लाभ को ध्यान में रखकर दी जाती है। Drexon Renewable Energy Pvt. Ltd. में हमारा उद्देश्य बिल्कुल अलग है — हम आपके लाभ के लिए काम करते हैं। हम आपको स्वतंत्र कंसल्टेंसी सेवाएँ प्रदान करते हैं ताकि आप अपने प्रोजेक्ट के लिए सबसे बेहतर और किफायती सिस्टम डिज़ाइन, उपकरण और तकनीकी समाधान चुन सकें। हमारा मुख्य लक्ष्य है कि आपके निवेश पर अधिकतम लाभ (ROI) सुनिश्चित किया जा सके, जिसके लिए हम उच्च गुणवत्ता वाले Balance of System (BOS) कंपोनेंट्स और अनुकूल डिज़ाइन प्रदान करते हैं। हमारी कंसल्टेंसी सेवाएँ व्यक्तिगत एवं घरेलू सोलर प्रोजेक्ट्स के लिए पूर्णतः निःशुल्क हैं। इसलिए, किसी वेंडर को अंतिम रूप देने से पहले — Drexon से परामर्श लें और समझदारी से सोलर निवेश करें।
+    </p>
+  </div>
+
+  <section>
+    <h2>Our Services</h2>
+    <div class="offers-grid">
+      <div class="offer-card">
+        <div style="font-size:42px;">☀️</div>
+        <div class="offer-title">Solar Panel Installation</div>
+        <p>Efficient solar panels installed for home or business.</p>
+      </div>
+      <div class="offer-card">
+        <div style="font-size:42px;">📊</div>
+        <div class="offer-title">Energy Consultation</div>
+        <p>Personalized solar consultation and ROI planning.</p>
+      </div>
+      <div class="offer-card">
+        <div style="font-size:42px;">🛠️</div>
+        <div class="offer-title">Maintenance & Monitoring</div>
+        <p>24/7 monitoring and expert maintenance support.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Our Solar Offers</h2>
+    <div class="offers-grid">
+      <div class="offer-card">
+        <div style="font-size:42px;">🌞</div>
+        <div class="offer-title">1 kW</div>
+        <p>₹1,200–1,500 / month</p>
+      </div>
+      <div class="offer-card">
+        <div style="font-size:42px;">☀️</div>
+        <div class="offer-title">2 kW</div>
+        <p>₹2,400–3,000 / month</p>
+      </div>
+      <div class="offer-card">
+        <div style="font-size:42px;">🔆</div>
+        <div class="offer-title">3 kW</div>
+        <p>₹3,600–4,500 / month</p>
+      </div>
+      <div class="offer-card">
+        <div style="font-size:42px;">🌤️</div>
+        <div class="offer-title">4 kW</div>
+        <p>₹4,800–6,000 / month</p>
+      </div>
+      <div class="offer-card">
+        <div style="font-size:42px;">⚡</div>
+        <div class="offer-title">5 kW</div>
+        <p>₹6,000–7,500 / month</p>
+      </div>
+      <div class="offer-card">
+        <div style="font-size:42px;">🏢</div>
+        <div class="offer-title">1 MW Commercial</div>
+        <p>₹12–15 Lakhs / year</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Frequently Asked Questions</h2>
+    <div class="offers-grid">
+      <div class="faq-card">
+        <h4>Will solar panels work during power cuts or at night?</h4>
+        <p>Solar panels generate electricity only during sunlight hours. Systems with batteries or hybrid inverters can continue supplying power during outages. At night, electricity can be drawn from batteries or the grid.</p>
+      </div>
+      <div class="faq-card">
+        <h4>How much space do I need on my roof to install solar panels?</h4>
+        <p>On average, 1 kW requires 80–100 sq. ft. of shadow-free roof. Exact space depends on panel efficiency and layout.</p>
+      </div>
+      <div class="faq-card">
+        <h4>What is the upfront cost of installing a solar system for my home?</h4>
+        <p>Cost depends on size, components, and structure. Generally ₹45,000–65,000 per kW before subsidies.</p>
+      </div>
+      <div class="faq-card">
+        <h4>What kind of maintenance will I need to do at home?</h4>
+        <p>Minimal maintenance. Occasional cleaning and visual inspection suffice. Drexon provides support.</p>
+      </div>
+      <div class="faq-card">
+        <h4>What is Horizon Renewable Power’s mission and three-year capacity target?</h4>
+        <p>The mission focuses on accelerating renewable energy adoption. Drexon expands residential and commercial solar sustainably.</p>
+      </div>
+      <div class="faq-card">
+        <h4>What are the primary benefits of installing a solar rooftop system?</h4>
+        <p>Benefits include reduced electricity bills, protection against tariffs, low maintenance, clean energy, increased property value.</p>
+      </div>
+      <div class="faq-card">
+        <h4>How does the solar installation process work from survey to commissioning?</h4>
+        <p>Process: site survey, system design, approvals, installation, testing, commissioning with net metering.</p>
+      </div>
+      <div class="faq-card">
+        <h4>What differentiates Horizon Renewable Power’s solutions from others?</h4>
+        <p>Drexon provides independent consultancy, ROI-focused design, premium BOS components, and transparency.</p>
+      </div>
+      <div class="faq-card">
+        <h4>Which customer segments do you serve?</h4>
+        <p>Residential, commercial, industrial, institutional customers, with customized solutions for each segment.</p>
+      </div>
+      <div class="faq-card">
+        <h4>What financing models are available, and how do EPC and RESCO differ?</h4>
+        <p>EPC: customer owns system. RESCO: user pays for energy, developer owns system.</p>
+      </div>
+      <div class="faq-card">
+        <h4>Are there any government incentives or subsidies available? What are the financial benefits and payback period for solar?</h4>
+        <p>Yes. Residential rooftop subsidies reduce costs, payback 4–6 years.</p>
+      </div>
+      <div class="faq-card">
+        <h4>What is the lifespan and maintenance requirement of a solar system? Is post-installation support and monitoring provided?</h4>
+        <p>Panels last 25+ years, inverters 8–12 years. Monitoring & support provided.</p>
+      </div>
+      <div class="faq-card">
+        <h4>How does net metering work and how does it help reduce carbon emissions?</h4>
+        <p>Net metering exports excess energy to the grid, lowering bills and carbon emissions.</p>
+      </div>
+      <div class="faq-card">
+        <h4>Is post-installation support and monitoring provided?</h4>
+        <p>Yes. Drexon offers continuous monitoring and maintenance assistance.</p>
+      </div>
+      <div class="faq-card">
+        <h4>What common concerns do customers have, and how do you address them?</h4>
+        <p>Concerns: cost, reliability, maintenance. Addressed via transparent consultation, quality components, service support.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>📞 Contact Us</h2>
+    <div class="offers-grid">
+      <a class="offer-card" href="tel:+918979302620">
+        <div style="font-size:36px;">📞</div>
+        <div class="offer-title">Call</div>
+        <p>+91 8979302620</p>
+      </a>
+      <a class="offer-card" href="mailto:drexonsolarsolutions@gmail.com">
+        <div style="font-size:36px;">✉️</div>
+        <div class="offer-title">Email</div>
+        <p>drexonsolarsolutions@gmail.com</p>
+      </a>
+      <a class="offer-card" href="https://www.linkedin.com/company/drexon/" target="_blank">
+        <div style="font-size:36px;">🔗</div>
+        <div class="offer-title">LinkedIn</div>
+        <p>Connect with us</p>
+      </a>
+    </div>
+    <div class="offers-grid" style="margin-top:30px; justify-content:center;">
+      <a class="offer-card" href="https://www.google.com/maps/search/?api=1&query=Drexon+Renewable+Energy+Aligarh+Uttar+Pradesh" target="_blank">
+        <div style="font-size:36px;">📍</div>
+        <div class="offer-title">Office Address</div>
+        <p>Aligarh, Uttar Pradesh</p>
+      </a>
+      <a class="offer-card" href="https://www.linkedin.com/newsletters/renewable-energy-insights-7352739799037857793/" target="_blank">
+        <div style="font-size:36px;">📰</div>
+        <div class="offer-title">Blog</div>
+        <p>Renewable Energy Insights</p>
+      </a>
+    </div>
+    <p style="text-align:center; margin-top:40px; font-size:14px;">© Drexon Renewable Energy</p>
+  </section>
+
+  <div class="sticky-buttons">
+    <a href="https://wa.me/918979302620" target="_blank">💬</a>
+  </div>
+
+  <script>
+    // Popup
+    const openBtn = document.getElementById('openPopup');
+    const popup = document.getElementById('readMorePopup');
+    const overlay = document.getElementById('popupOverlay');
+    const closeBtn = document.getElementById('closePopup');
+    openBtn.onclick = () => {
+      popup.classList.add('show');
+      overlay.classList.add('show');
+    };
+    closeBtn.onclick = overlay.onclick = () => {
+      popup.classList.remove('show');
+      overlay.classList.remove('show');
+    };
+  </script>
+
+</body>
+
+</html>
