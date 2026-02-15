@@ -1,0 +1,39 @@
+.hero {
+  position: relative;
+  padding: 120px 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Sticky Premium Parallax Background */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)),
+    url("https://media.istockphoto.com/id/1405880267/photo/two-engineers-installing-solar-panels-on-roof.webp?a=1&b=1&s=612x612&w=0&k=20&c=vwIX788BqsyiyPsTV9bCmAhjOV4AavH_wLc-pWNsAf8=");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.6;
+
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+/* Content above background */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #FFD700; /* golden text */
+}
+
+/* Optional smooth parallax animation */
+.hero:hover .hero-bg {
+  transform: scale(1.15);
+  transition: transform 6s ease;
+}
